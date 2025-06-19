@@ -1,4 +1,4 @@
-<div class="h-screen w-screen flex flex-col bg-white text-gray-800 relative overflow-hidden"
+<div class="h-screen w-screen flex flex-col  text-gray-800 relative overflow-hidden"
      style="background-image: {{ isset($settings['background_image']) ? 'url(' . Storage::url($settings['background_image']) . ')' : 'none' }}; 
             background-size: cover; 
             background-position: center;"
@@ -56,7 +56,7 @@
 
         <main class="flex-grow flex p-6 space-x-6 relative z-10   w-full">
             <div class="w-4/12 animate-slide-right-slow">
-                <div class=" rounded-2xl shadow-xl border-2 border-green-100 p-6 ">
+                <div class="h-full rounded-2xl shadow-xl border-2 border-black-100  p-6 ">
                     <h2 class="text-3xl font-bold mb-6 text-center text-green-700 animate-fade-in-delay">
                         Jadwal Sholat Hari Ini
                     </h2>
@@ -107,8 +107,8 @@
                 </div>
             </div>
 
-            <div class="w-8/12 animate-slide-left-slow">
-                <div class=" rounded-2xl shadow-xl border-2 border-green-100  flex items-center justify-center overflow-hidden">
+            <div class="w-8/12  animate-slide-left-slow">
+                <div class="h-full rounded-2xl shadow-xl border-2 border-black-100  flex items-center justify-center overflow-hidden">
                     @if($displayMode == 'normal')
                         @if($currentItem)
                             <div class="w-full h-full flex items-center justify-center animate-fade-in p-8">
@@ -181,16 +181,14 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M8.464 8.464a5 5 0 000 7.072M5.636 5.636a9 9 0 000 12.728"></path>
                 </svg>
                 <div class="flex-1 overflow-hidden">
-                    <div class="whitespace-nowrap text-xl py-2 font-medium running-text" 
-                         style="animation: marquee {{ $settings['running_text_speed'] ?? 45 }}s linear infinite;">
-                        @if($runningTexts->isNotEmpty())
-                            @foreach($runningTexts as $text)
-                                <span class="mx-8">{{ $text->content }}</span>
-                            @endforeach
-                        @else
-                            <span class="mx-4">Selamat datang di {{ $settings['mosque_name'] ?? 'Masjid Kami' }}. Semoga Allah SWT menerima amal ibadah kita semua.</span>
-                        @endif
-                    </div>
+                <div class="whitespace-nowrap text-xl py-2 font-medium running-text" 
+     style="animation: marquee {{ $settings['running_text_speed'] ?? 45 }}s linear infinite;">
+    @if($runningTexts->isNotEmpty())
+        @foreach($runningTexts as $text)
+            <span class="mx-8">{{ $text->content }}</span>
+        @endforeach
+    @endif
+</div>
                 </div>
             </div>
         </footer>
