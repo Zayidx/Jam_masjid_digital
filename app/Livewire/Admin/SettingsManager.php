@@ -1,4 +1,5 @@
 <?php
+// zayidx/jam_masjid_digital/Jam_masjid_digital-952dd6084a61afc378bb36d0532d50545135b829/app/Livewire/Admin/SettingsManager.php
 
 namespace App\Livewire\Admin;
 
@@ -21,6 +22,8 @@ class SettingsManager extends Component
         'settings.mosque_name' => 'required|string|max:255',
         'settings.mosque_address' => 'nullable|string',
         'settings.mosque_city_name' => 'nullable|string',
+        // --- PENAMBAHAN: Aturan validasi untuk nama negara ---
+        'settings.country_name' => 'required|string',
         'settings.location_city_id' => 'required|string',
         'settings.donation_account_name' => 'nullable|string',
         'settings.theme_bg_color' => 'nullable|string',
@@ -34,9 +37,14 @@ class SettingsManager extends Component
         'settings.iqamah_duration_ashar' => 'nullable|numeric|min:1',
         'settings.iqamah_duration_maghrib' => 'nullable|numeric|min:1',
         'settings.iqamah_duration_isya' => 'nullable|numeric|min:1',
+        // --- PENAMBAHAN: Aturan validasi untuk kecepatan teks berjalan ---
+        'settings.running_text_speed' => 'nullable|numeric|min:5',
+        // --- PENAMBAHAN: Aturan validasi untuk durasi adzan ---
+        'settings.adhan_duration_seconds' => 'nullable|numeric|min:30',
         'logoUpload' => 'nullable|image|max:1024',
         'backgroundUpload' => 'nullable|image|max:2048',
         'qrisUpload' => 'nullable|image|max:1024',
+        
     ];
 
     public function mount()
@@ -61,22 +69,21 @@ class SettingsManager extends Component
         }
 
         foreach ($this->settings as $key => $value) {
-            if ($value !== null) {
-                Setting::updateOrCreate(
-                    ['key' => $key],
-                    ['value' => $value]
-                );
-            }
+            // --- PERUBAHAN: Memastikan nilai null juga disimpan agar bisa mengosongkan setting ---
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
         }
 
         session()->flash('message', 'Pengaturan berhasil disimpan.');
-        // PERUBAHAN DARI EMIT KE DISPATCH
+        // --- PERUBAHAN: Menggunakan sintaks dispatch Livewire v3 yang lebih modern ---
         $this->dispatch('settingsUpdated');
     }
 
     public function forceReboot()
     {
-        // PERUBAHAN DARI EMIT KE DISPATCH
+        // --- PERUBAHAN: Menggunakan sintaks dispatch Livewire v3 yang lebih modern ---
         $this->dispatch('forceRebootDisplay');
         session()->flash('message', 'Sinyal reboot telah dikirim ke perangkat TV.');
     }

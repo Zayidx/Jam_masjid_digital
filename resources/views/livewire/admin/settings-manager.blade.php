@@ -1,3 +1,4 @@
+// zayidx/jam_masjid_digital/Jam_masjid_digital-952dd6084a61afc378bb36d0532d50545135b829/resources/views/livewire/admin/settings-manager.blade.php
 <div>
     <form wire:submit.prevent="save" class="p-4 sm:p-6 lg:p-8 space-y-8">
 
@@ -15,6 +16,14 @@
         <div class="p-6 bg-white shadow rounded-lg">
             <h2 class="text-xl font-semibold mb-4 text-gray-800">Identitas & Lokasi</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                    <label class="block text-sm font-medium text-gray-700">Nama Kota</label>
+                    <input type="text" wire:model.defer="settings.mosque_city_name" placeholder="Contoh: DKI Jakarta" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Negara</label>
+                    <input type="text" wire:model.defer="settings.country_name" placeholder="Contoh: Indonesia" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Nama Masjid</label>
                     <input type="text" wire:model.defer="settings.mosque_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
@@ -68,10 +77,19 @@
                     <input type="range" min="0" max="100" wire:model.defer="settings.master_volume" class="mt-1 block w-full">
                 </div>
                 <div>
+                    <label class="block text-sm font-medium text-gray-700">Kecepatan Teks Berjalan (detik)</label>
+                    <input type="number" wire:model.defer="settings.running_text_speed" placeholder="Default: 45" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Durasi Adzan (detik)</label>
+                    <input type="number" wire:model.defer="settings.adhan_duration_seconds" placeholder="Default: 180" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                </div>
+                <div>
                     <label class="block text-sm font-medium text-gray-700">Mode Tampilan QRIS</label>
                     <select wire:model.defer="settings.qris_display_mode" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                         <option value="cycle">Bergantian dengan konten lain</option>
                         <option value="corner">Selalu tampil di sudut</option>
+                        <option value="disabled">Jangan Tampilkan</option>
                     </select>
                 </div>
                 <div>
